@@ -35,9 +35,7 @@ function checkGuess() {
     numberOfGuessesMessage.textContent = `You made ${attempts} guesses`;
 
     correctMessage.style.display = '';
-
-    submitButton.disabled = true;
-    guessInput.disabled = true;
+    
   } else {
     if (guess < targetNumber) {
       tooLowMessage.style.display = '';
@@ -52,14 +50,13 @@ function checkGuess() {
     } remaining`;
   }
 
-  if (attempts === maxNumberOfAttempts) {
-    submitButton.disabled = true;
+  if (attempts >= maxNumberOfAttempts) {
+    submitButton.disabled = false;
     guessInput.disabled = true;
     maxGuessesMessage.style.display = '';
-  }
+  } 
 
   guessInput.value = '';
-
   resetButton.style.display = '';
 }
 
