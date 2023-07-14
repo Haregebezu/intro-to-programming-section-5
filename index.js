@@ -34,36 +34,43 @@ function checkGuess() {
     numberOfGuessesMessage.style.display = '';
     numberOfGuessesMessage.textContent = `You made ${attempts} guesses`;
 
-    correctMessage.style.display = '';
-    
+    correctMessage.style.display = 'block';
+    correctMessage.textContent = 'Guessed correctly';
+
+    submitButton.disabled = true;
+    guessInput.disabled = true;
+    resetButton.disabled = false; // Enable the reset button
   } else {
     if (guess < targetNumber) {
-      tooLowMessage.style.display = '';
+      tooLowMessage.style.display = 'block';
     } else {
-      tooHighMessage.style.display = '';
+      tooHighMessage.style.display = 'block';
     }
 
     const remainingAttempts = maxNumberOfAttempts - attempts;
 
-    numberOfGuessesMessage.style.display = '';
-    numberOfGuessesMessage.textContent = `You guessed ${guess}. ${remainingAttempts} ${remainingAttempts === 1 ? 'guess' : 'guesses'
-    } remaining`;
+    numberOfGuessesMessage.style.display = 'block';
+    numberOfGuessesMessage.textContent = `You guessed ${guess}. ${remainingAttempts} ${remainingAttempts === 1 ? 'guess' : 'guesses'} remaining`;
   }
 
-  if (attempts >= maxNumberOfAttempts) {
-    submitButton.disabled = false;
+  if (attempts === maxNumberOfAttempts) {
+    submitButton.disabled = true;
     guessInput.disabled = true;
-    maxGuessesMessage.style.display = '';
+    resetButton.disabled = false; // Enable the reset button
+    maxGuessesMessage.style.display = 'block';
+    resetButton.style.display = ''; // Show the reset button
   } 
 
   guessInput.value = '';
-  resetButton.style.display = '';
+  
 }
 
 function hideAllMessages() {
-  for (let elementIndex = 0; elementIndex < messages.length; elementIndex++) {
-    messages[elementIndex].style.display = 'none';
-  }
+tooHighMessage.style.display = 'none';
+tooLowMessage.style.display = 'none';
+maxGuessesMessage.style.display = 'none';
+correctMessage.style.display = 'none';
+numberOfGuessesMessage.style.display = 'none';
 }
 
 function setup() {
@@ -80,6 +87,9 @@ function setup() {
 
   hideAllMessages();
   resetButton.style.display = 'none';
+  resetButton.disabled = true; // Disable the reset button initially
+
+  submitButton.disabled = false; // Enable the submit butt
 }
 
 submitButton.addEventListener('click', checkGuess);
