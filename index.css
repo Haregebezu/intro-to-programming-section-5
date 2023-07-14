@@ -13,3 +13,9 @@ main {
 #reset {
   margin: 20px;
 }
+.message, #reset {
+  display: none;
+}
+.message, #reset {
+  display: block;
+}
